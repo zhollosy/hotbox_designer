@@ -58,10 +58,12 @@ class CreateHotboxDialog(QtWidgets.QDialog):
         self.duplicate = QtWidgets.QRadioButton("duplicate existing hotbox")
         self.duplicate.setEnabled(bool(self.hotboxes))
         self.template = QtWidgets.QRadioButton("from template")
+        self.shelf = QtWidgets.QRadioButton("from current shelf")
         self.groupbutton = QtWidgets.QButtonGroup()
         self.groupbutton.addButton(self.new, 0)
         self.groupbutton.addButton(self.duplicate, 1)
         self.groupbutton.addButton(self.template, 2)
+        self.groupbutton.addButton(self.shelf, 3)
         self.new.setChecked(True)
 
         self.existing = QtWidgets.QComboBox()
@@ -77,6 +79,7 @@ class CreateHotboxDialog(QtWidgets.QDialog):
         self.up_layout.addWidget(self.duplicate, 1, 0)
         self.up_layout.addWidget(self.existing, 1, 1)
         self.up_layout.addWidget(self.template, 2, 0)
+        self.up_layout.addWidget(self.shelf, 3, 0)
         self.up_layout.addWidget(self.template_combo, 2, 1)
 
         self.ok = QtWidgets.QPushButton('ok')
