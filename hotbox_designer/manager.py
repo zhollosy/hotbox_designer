@@ -41,7 +41,7 @@ def load_hotboxes(application):
     hotboxes_datas = load_hotboxes_datas(application.local_file)
     file_ = application.shared_file
     hotboxes_datas += [
-        ensure_old_data_compatible(load_json(f)) for f in load_json(file_)]
+        ensure_old_data_compatible(load_json(f)) for f in (load_json(file_) or [])]
 
     for hotboxes_data in hotboxes_datas:
         name = hotboxes_data['general']['name']
@@ -440,7 +440,7 @@ class HotboxTableView(QtWidgets.QTableView):
         self.selection_model = None
         vheader = self.verticalHeader()
         vheader.hide()
-        vheader.setSectionResizeMode(vheader.ResizeToContents)
+        vheader.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         hheader = self.horizontalHeader()
         hheader.setStretchLastSection(True)
         hheader.hide()

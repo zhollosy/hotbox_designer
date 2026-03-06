@@ -128,6 +128,39 @@ if PYSIDE_VERSION == 6:
 
 
 # ---------------------------------------------------------------------------
+# QAction moved from QtWidgets to QtGui in PySide6
+# ---------------------------------------------------------------------------
+if PYSIDE_VERSION == 6:
+    if not hasattr(QtWidgets, 'QAction'):
+        QtWidgets.QAction = QtGui.QAction
+
+
+# ---------------------------------------------------------------------------
+# QHeaderView resize modes (moved to QHeaderView.ResizeMode in PySide6)
+# ---------------------------------------------------------------------------
+if PYSIDE_VERSION == 6:
+    _HV = QtWidgets.QHeaderView
+    for _attr in ('ResizeToContents', 'Stretch', 'Fixed', 'Interactive',
+                  'Custom'):
+        if not hasattr(_HV, _attr) and hasattr(_HV.ResizeMode, _attr):
+            setattr(_HV, _attr, getattr(_HV.ResizeMode, _attr))
+
+
+# ---------------------------------------------------------------------------
+# QAbstractItemView selection/scroll enums (moved to sub-enums in PySide6)
+# ---------------------------------------------------------------------------
+if PYSIDE_VERSION == 6:
+    _AIV = QtWidgets.QAbstractItemView
+    for _attr in ('SelectRows', 'SelectColumns', 'SelectItems'):
+        if not hasattr(_AIV, _attr) and hasattr(_AIV.SelectionBehavior, _attr):
+            setattr(_AIV, _attr, getattr(_AIV.SelectionBehavior, _attr))
+    for _attr in ('SingleSelection', 'MultiSelection', 'ExtendedSelection',
+                  'ContiguousSelection', 'NoSelection'):
+        if not hasattr(_AIV, _attr) and hasattr(_AIV.SelectionMode, _attr):
+            setattr(_AIV, _attr, getattr(_AIV.SelectionMode, _attr))
+
+
+# ---------------------------------------------------------------------------
 # QMessageBox buttons (moved to sub-enum in PySide6)
 # ---------------------------------------------------------------------------
 if PYSIDE_VERSION == 6:
