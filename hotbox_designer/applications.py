@@ -1,6 +1,6 @@
 import os
 import json
-from PySide2 import QtWidgets
+from hotbox_designer.qt import QtWidgets, QtCompat
 from hotbox_designer.dialog import warning
 from hotbox_designer.languages import (
     MEL, PYTHON, NUKE_TCL, NUKE_EXPRESSION, HSCRIPT)
@@ -62,10 +62,9 @@ class Maya(AbstractApplication):
     @staticmethod
     def get_main_window():
         import maya.OpenMayaUI as omui
-        import shiboken2
         main_window = omui.MQtUtil.mainWindow()
         if main_window is not None:
-            return shiboken2.wrapInstance(long(main_window), QtWidgets.QWidget)
+            return QtCompat.wrapInstance(main_window, QtWidgets.QWidget)
 
     @staticmethod
     def get_reader_parent():

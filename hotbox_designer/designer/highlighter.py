@@ -1,5 +1,5 @@
 import keyword
-from PySide2 import QtGui, QtCore
+from hotbox_designer.qt import QtGui, QtCore
 from hotbox_designer.languages import PYTHON, MEL
 
 
